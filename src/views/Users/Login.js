@@ -46,10 +46,10 @@ class Login extends Component {
                 localStorage.setItem('userInfo',JSON.stringify(userInfo));
                 console.log('emp',localStorage.getItem('userInfo'))
                 console.log('raw',userInfo)
-                if(userType=="member"){
+                if(userType==="member"){
                     const group_id = response.data.user.group_id;
                     localStorage.setItem('group_id',group_id);
-                }else if(userType=="manager"){
+                }else if(userType==="manager"){
                     const organization_id = response.data.user_info.organization_id;
                     localStorage.setItem('organization_id',organization_id);
                 }
