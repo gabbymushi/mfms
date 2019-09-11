@@ -54,7 +54,7 @@ class RegisterUser extends Component {
             address: '',
             residence: '',
             business: '',
-            joinDate: ''
+            join_date: ''
         };
     }
 
@@ -89,7 +89,7 @@ class RegisterUser extends Component {
         this.setState({ residence: e.target.value });
     }
      handleJoinDate = (e) => {
-        this.setState({ joinDate: e.target.value });
+        this.setState({ join_date: e.target.value });
     }
     handleBusiness= (e) => {
         this.setState({ business: e.target.value });
@@ -114,7 +114,9 @@ class RegisterUser extends Component {
             email: this.state.email,
             address: this.state.address,
             group_id: group_id,
-            residence: this.state.residence
+            residence: this.state.residence,
+            business: this.state.business,
+            join_date: this.state.join_date
         };
         let token = localStorage.getItem('token');
         const headers = {
@@ -137,7 +139,7 @@ class RegisterUser extends Component {
                 address: '',
                 residence: '',
                 business: '',
-                joinDate: ''
+                join_date: ''
             });
         }).catch((error) => {
             console.log(error.request);
@@ -305,7 +307,7 @@ class RegisterUser extends Component {
                                         <Col xs="12" md="4">
                                             <Input
                                                 onChange={this.handleJoinDate}
-                                                value={this.state.joinDate}
+                                                value={this.state.join_date}
                                                 type="date"
                                                 name="text-input" placeholder="Join Date"
                                                 required />
