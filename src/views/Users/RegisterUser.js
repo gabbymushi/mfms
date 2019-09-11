@@ -88,10 +88,10 @@ class RegisterUser extends Component {
     handleResidence(e) {
         this.setState({ residence: e.target.value });
     }
-    handleJoinDate(e) {
+     handleJoinDate = (e) => {
         this.setState({ joinDate: e.target.value });
     }
-    handleBusiness(e) {
+    handleBusiness= (e) => {
         this.setState({ business: e.target.value });
     }
 
@@ -306,7 +306,7 @@ class RegisterUser extends Component {
                                             <Input
                                                 onChange={this.handleJoinDate}
                                                 value={this.state.joinDate}
-                                                type="date" 
+                                                type="date"
                                                 name="text-input" placeholder="Join Date"
                                                 required />
                                             {/*<FormText color="muted">This is a help text</FormText>*/}
@@ -315,7 +315,7 @@ class RegisterUser extends Component {
                                 </CardBody>
                                 <CardFooter>
                                     <Button type="submit" size="sm" color="primary">
-                                        <i className="fa fa-dot-circle-o"></i> Submit</Button>
+                                        <i className="fa fa-dot-circle-o"></i> Next</Button>
                                     <Button type="reset" size="sm" color="danger">
                                         <i className="fa fa-ban"></i> Reset</Button>
                                 </CardFooter>
