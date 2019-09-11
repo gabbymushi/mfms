@@ -115,11 +115,20 @@ class User extends Component {
                                             <tr>
                                                 <td>Address</td>
                                                 <td><strong>{member.address}</strong></td>
+                                            </tr> 
+                                            <tr>
+                                                <td>Business</td>
+                                                <td><strong>{member.business}</strong></td>
                                             </tr>
                                             <tr>
                                                 <td>Registered Date</td>
                                                 <td><strong>{member.created_at}</strong></td>
                                             </tr>
+                                            <tr>
+                                                <td>Join Date</td>
+                                                <td><strong>{member.join_date}</strong></td>
+                                            </tr>
+                                           
                                         </tbody>
                                     </Table>
                                 </CardBody>
