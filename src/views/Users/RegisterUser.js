@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import {
     Badge,
@@ -26,7 +26,7 @@ import {
     Row,
 } from 'reactstrap';
 import SystemParameters from '../../SystemParameters';
-let apiBaseUrl=SystemParameters.apiBaseUrl;
+let apiBaseUrl = SystemParameters.apiBaseUrl;
 class RegisterUser extends Component {
     constructor(props) {
         super(props);
@@ -52,48 +52,56 @@ class RegisterUser extends Component {
             phone_no_2: '',
             email: '',
             address: '',
-            residence: ''
+            residence: '',
+            business: '',
+            joinDate: ''
         };
     }
 
     handleFirstName(e) {
-        this.setState({first_name: e.target.value});
+        this.setState({ first_name: e.target.value });
     }
     handleMiddleName(e) {
-        this.setState({middle_name: e.target.value});
+        this.setState({ middle_name: e.target.value });
     }
     handleLastName(e) {
-        this.setState({last_name: e.target.value});
+        this.setState({ last_name: e.target.value });
     }
     handleSex(e) {
-        this.setState({gender: e.target.value});
+        this.setState({ gender: e.target.value });
     }
     handleBirthday(e) {
-        this.setState({birthday: e.target.value});
+        this.setState({ birthday: e.target.value });
     }
     handlePhoneNo(e) {
-        this.setState({phone_no: e.target.value});
+        this.setState({ phone_no: e.target.value });
     }
     handlePhoneNo2(e) {
-        this.setState({phone_no_2: e.target.value});
+        this.setState({ phone_no_2: e.target.value });
     }
     handleEmail(e) {
-        this.setState({email: e.target.value});
+        this.setState({ email: e.target.value });
     }
     handleAddress(e) {
-        this.setState({address: e.target.value});
+        this.setState({ address: e.target.value });
     }
     handleResidence(e) {
-        this.setState({residence: e.target.value});
+        this.setState({ residence: e.target.value });
+    }
+    handleJoinDate(e) {
+        this.setState({ joinDate: e.target.value });
+    }
+    handleBusiness(e) {
+        this.setState({ business: e.target.value });
     }
 
     handleSubmit(e) {
         e.preventDefault();
-        let group_id=this.props.match.params.id;
-        if(group_id==="group"){
-            group_id=localStorage.getItem('group_id')
-        }else{
-            group_id=this.props.match.params.id
+        let group_id = this.props.match.params.id;
+        if (group_id === "group") {
+            group_id = localStorage.getItem('group_id')
+        } else {
+            group_id = this.props.match.params.id
         }
         const data = {
             first_name: this.state.first_name,
@@ -106,16 +114,16 @@ class RegisterUser extends Component {
             email: this.state.email,
             address: this.state.address,
             group_id: group_id,
-            residence:this.state.residence
+            residence: this.state.residence
         };
-        let  token =localStorage.getItem('token');
+        let token = localStorage.getItem('token');
         const headers = {
             //'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         }
 
-        let url =  apiBaseUrl+'/add_user';
-        axios.post(url, data,{headers:headers}).then((response) => {
+        let url = apiBaseUrl + '/add_user';
+        axios.post(url, data, { headers: headers }).then((response) => {
             console.log(response.data);
             this.setState({
                 first_name: '',
@@ -127,7 +135,9 @@ class RegisterUser extends Component {
                 phone_no_2: '',
                 email: '',
                 address: '',
-                residence: ''
+                residence: '',
+                business: '',
+                joinDate: ''
             });
         }).catch((error) => {
             console.log(error.request);
@@ -143,8 +153,8 @@ class RegisterUser extends Component {
                 <Row>
                     <Col xs="12" md="12">
                         <Card>
-                            <Form  onSubmit={this.handleSubmit} action="" method="post" encType="multipart/form-data"
-                                  className="form-horizontal">
+                            <Form onSubmit={this.handleSubmit} action="" method="post" encType="multipart/form-data"
+                                className="form-horizontal">
                                 <CardHeader>
                                     <strong>Member</strong> Registration
                                 </CardHeader>
@@ -158,8 +168,8 @@ class RegisterUser extends Component {
                                                 onChange={this.handleFirstName}
                                                 value={this.state.first_name}
                                                 type="text" id="text-input"
-                                                   name="text-input" placeholder="First Name"
-                                                   required/>
+                                                name="text-input" placeholder="First Name"
+                                                required />
                                             {/*<FormText color="muted">This is a help text</FormText>*/}
                                         </Col>  <Col md="2">
                                             <Label htmlFor="text-input">Middle Name</Label>
@@ -169,8 +179,8 @@ class RegisterUser extends Component {
                                                 onChange={this.handleMiddleName}
                                                 value={this.state.middle_name}
                                                 type="text" id="text-input"
-                                                   name="text-input" placeholder="Middle Name"
-                                                   required/>
+                                                name="text-input" placeholder="Middle Name"
+                                                required />
                                             {/*<FormText color="muted">This is a help text</FormText>*/}
                                         </Col>
                                     </FormGroup>
@@ -183,17 +193,17 @@ class RegisterUser extends Component {
                                                 onChange={this.handleLastName}
                                                 value={this.state.last_name}
                                                 type="text" id="text-input"
-                                                   name="text-input" placeholder="Last Name"
-                                                   required/>
+                                                name="text-input" placeholder="Last Name"
+                                                required />
                                             {/*<FormText color="muted">This is a help text</FormText>*/}
                                         </Col>  <Col md="2">
                                             <Label htmlFor="text-input">Sex</Label>
                                         </Col>
                                         <Col xs="12" md="4">
                                             <Input type="select"
-                                                   onChange={this.handleSex}
-                                                   value={this.state.gender}
-                                                   name="select" id="select" required>
+                                                onChange={this.handleSex}
+                                                value={this.state.gender}
+                                                name="select" id="select" required>
                                                 <option value="">Select Sex</option>
                                                 <option value="male">Male</option>
                                                 <option value="female">Female</option>
@@ -210,8 +220,8 @@ class RegisterUser extends Component {
                                                 onChange={this.handleBirthday}
                                                 value={this.state.birthday}
                                                 type="date" id="text-input"
-                                                   name="text-input" placeholder="Birthday"
-                                                   required/>
+                                                name="text-input" placeholder="Birthday"
+                                                required />
                                             {/*<FormText color="muted">This is a help text</FormText>*/}
                                         </Col>  <Col md="2">
                                             <Label htmlFor="text-input">Phone No</Label>
@@ -221,8 +231,8 @@ class RegisterUser extends Component {
                                                 onChange={this.handlePhoneNo}
                                                 value={this.state.phone_no}
                                                 type="text" id="text-input"
-                                                   name="text-input" placeholder="Phone No"
-                                                   required/>
+                                                name="text-input" placeholder="Phone No"
+                                                required />
                                             {/*<FormText color="muted">This is a help text</FormText>*/}
                                         </Col>
                                     </FormGroup>
@@ -235,8 +245,8 @@ class RegisterUser extends Component {
                                                 onChange={this.handlePhoneNo2}
                                                 value={this.state.phone_no_2}
                                                 type="text" id="text-input"
-                                                   name="text-input" placeholder="Phone No"
-                                                   required/>
+                                                name="text-input" placeholder="Phone No"
+                                                required />
                                             {/*<FormText color="muted">This is a help text</FormText>*/}
                                         </Col>  <Col md="2">
                                             <Label htmlFor="text-input">Email</Label>
@@ -246,8 +256,8 @@ class RegisterUser extends Component {
                                                 onChange={this.handleEmail}
                                                 value={this.state.email}
                                                 type="email" id="text-input"
-                                                   name="text-input" placeholder="Name"
-                                                   required/>
+                                                name="text-input" placeholder="Name"
+                                                required />
                                             {/*<FormText color="muted">This is a help text</FormText>*/}
                                         </Col>
                                     </FormGroup>
@@ -260,8 +270,8 @@ class RegisterUser extends Component {
                                                 onChange={this.handleAddress}
                                                 value={this.state.address}
                                                 type="text" id="text-input"
-                                                   name="text-input" placeholder="Address"
-                                                   required/>
+                                                name="text-input" placeholder="Address"
+                                                required />
                                             {/*<FormText color="muted">This is a help text</FormText>*/}
                                         </Col>  <Col md="2">
                                             <Label htmlFor="text-input">Residence</Label>
@@ -271,8 +281,34 @@ class RegisterUser extends Component {
                                                 onChange={this.handleResidence}
                                                 value={this.state.residence}
                                                 type="text" id="text-input"
-                                                   name="text-input" placeholder="Residence"
-                                                   required/>
+                                                name="text-input" placeholder="Residence"
+                                                required />
+                                            {/*<FormText color="muted">This is a help text</FormText>*/}
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                        <Col md="2">
+                                            <Label htmlFor="text-input">Business</Label>
+                                        </Col>
+                                        <Col xs="12" md="4">
+                                            <Input
+                                                onChange={this.handleBusiness}
+                                                value={this.state.business}
+                                                type="text" id="text-input"
+                                                name="text-input" placeholder="Business"
+                                                required />
+                                            {/*<FormText color="muted">This is a help text</FormText>*/}
+                                        </Col>
+                                        <Col md="">
+                                            <Label htmlFor="text-input">Join Date</Label>
+                                        </Col>
+                                        <Col xs="12" md="4">
+                                            <Input
+                                                onChange={this.handleJoinDate}
+                                                value={this.state.joinDate}
+                                                type="date" 
+                                                name="text-input" placeholder="Join Date"
+                                                required />
                                             {/*<FormText color="muted">This is a help text</FormText>*/}
                                         </Col>
                                     </FormGroup>
