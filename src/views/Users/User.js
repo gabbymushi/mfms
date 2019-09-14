@@ -150,6 +150,73 @@ class User extends Component {
                             </Card>
                         </Col>
                     </Row>
+                    <Row>
+                        <Col lg={8}>
+                            <Card>
+                                <CardHeader>
+                                    <strong><i className="icon-info pr-1"></i>Heir' deteils</strong>
+                                </CardHeader>
+                                <CardBody>
+                                    <Table responsive striped hover>
+                                        <tbody>
+                                            <tr>
+                                                <td>Full Name</td>
+                                                <td><strong>{member.heir.first_name} {member.heir.middle_name} {member.heir.last_name}</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Gender</td>
+                                                <td><strong>{member.heir.gender}</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Birthday</td>
+                                                <td><strong>{member.heir.birthday}</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Phone No</td>
+                                                <td><strong>{member.heir.phone_no}</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Altenative phone no</td>
+                                                <td><strong>{member.heir.phone_no_2}</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>E-mail</td>
+                                                <td><strong>{member.heir.email}</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Address</td>
+                                                <td><strong>{member.heir.address}</strong></td>
+                                            </tr> 
+                                            <tr>
+                                                <td>Business</td>
+                                                <td><strong>{member.heir.business}</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Relation</td>
+                                                <td><strong>{member.heir.relation}</strong></td>
+                                            </tr>
+                                           
+                                        </tbody>
+                                    </Table>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                        <Col sm="12" xl="4">
+                  {/*           <Card>
+                                <CardHeader>
+                                    <i className="fa fa-align-justify"></i><strong>Accounts Summary</strong>
+                                    <small> </small>
+                                </CardHeader>
+                                <CardBody>
+                                    <ListGroup>
+                                        <ListGroupItem className="justify-content-between">Savings Account <Badge className="float-right" pill>25,000,400 TZS</Badge></ListGroupItem>
+                                        <ListGroupItem className="justify-content-between">Loans Account <Badge className="float-right" pill>2,000,040 TZS</Badge></ListGroupItem>
+                                        <ListGroupItem className="justify-content-between">Share Account<Badge className="float-right" pill>4,000,000 TZS</Badge></ListGroupItem>
+                                    </ListGroup>
+                                </CardBody>
+                            </Card> */}
+                        </Col>
+                    </Row>
                 </div>
             )
         } else return null;
