@@ -43,8 +43,9 @@ class Heir extends Component {
             residence: '',
             business: '',
             relation: '',
-            member_id: '',
+            member_id: this.props.match.params.id
         };
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleFirstName = (e) => {
@@ -80,15 +81,13 @@ class Heir extends Component {
     handleBusiness = (e) => {
         this.setState({ business: e.target.value });
     }
+    handleRelation = (e) => {
+        this.setState({ relation: e.target.value });
+    }
 
     handleSubmit(e) {
         e.preventDefault();
-        let group_id = this.props.match.params.id;
-        if (group_id === "group") {
-            group_id = localStorage.getItem('group_id')
-        } else {
-            group_id = this.props.match.params.id
-        }
+        //console.log('ee',this.state.first_name);
         const data = {
             first_name: this.state.first_name,
             middle_name: this.state.middle_name,
@@ -99,10 +98,10 @@ class Heir extends Component {
             phone_no_2: this.state.phone_no_2,
             email: this.state.email,
             address: this.state.address,
-            group_id: group_id,
             residence: this.state.residence,
             business: this.state.business,
-            member_id: localStorage.getItem('group_id')
+            relation: this.state.relation,
+            member_id: this.state.member_id
         };
         let token = localStorage.getItem('token');
         const headers = {
@@ -110,7 +109,7 @@ class Heir extends Component {
             'Authorization': 'Bearer ' + token
         }
 
-        let url = apiBaseUrl + '/add_user';
+        let url = apiBaseUrl + '/add_heir';
         axios.post(url, data, { headers: headers }).then((response) => {
             console.log(response.data);
             this.setState({
@@ -124,7 +123,8 @@ class Heir extends Component {
                 email: '',
                 address: '',
                 residence: '',
-                business: ''
+                business: '',
+                relation:''
             });
         }).catch((error) => {
             console.log(error.request);
@@ -302,6 +302,7 @@ class Heir extends Component {
                                                 <option value="husband">Husband</option>
                                                 <option value="father">Father</option>
                                                 <option value="mother">Mother</option>
+                                                <option value="other">Other</option>
                                             </Input>
                                             {/*<FormText color="muted">This is a help text</FormText>*/}
                                         </Col>
