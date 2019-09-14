@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 import {
     Badge,
     Button,
@@ -88,10 +89,10 @@ class RegisterUser extends Component {
     handleResidence(e) {
         this.setState({ residence: e.target.value });
     }
-     handleJoinDate = (e) => {
+    handleJoinDate = (e) => {
         this.setState({ join_date: e.target.value });
     }
-    handleBusiness= (e) => {
+    handleBusiness = (e) => {
         this.setState({ business: e.target.value });
     }
 
@@ -141,8 +142,9 @@ class RegisterUser extends Component {
                 business: '',
                 join_date: ''
             });
+            this.props.history.push('/heir/' + response.data.member_id);
         }).catch((error) => {
-            console.log(error.request);
+            console.log(error);
         });
 
         //this.setState({email: e.target.value });
