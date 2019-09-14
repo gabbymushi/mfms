@@ -83,7 +83,7 @@ class User extends Component {
                         <Col lg={8}>
                             <Card>
                                 <CardHeader>
-                                    <strong><i className="icon-info pr-1"></i>User id: {this.props.match.params.id}</strong>
+                                    <strong><i className="icon-info pr-1"></i>Member's Information</strong>
                                 </CardHeader>
                                 <CardBody>
                                     <Table responsive striped hover>
