@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
 import {
     Badge,
     Button,
@@ -28,21 +27,9 @@ import {
 } from 'reactstrap';
 import SystemParameters from '../../SystemParameters';
 let apiBaseUrl = SystemParameters.apiBaseUrl;
-class RegisterUser extends Component {
+class Heir extends Component {
     constructor(props) {
         super(props);
-
-        this.handleFirstName = this.handleFirstName.bind(this);
-        this.handleEmail = this.handleEmail.bind(this);
-        this.handleMiddleName = this.handleMiddleName.bind(this);
-        this.handleLastName = this.handleLastName.bind(this);
-        this.handleSex = this.handleSex.bind(this);
-        this.handleBirthday = this.handleBirthday.bind(this);
-        this.handlePhoneNo = this.handlePhoneNo.bind(this);
-        this.handlePhoneNo2 = this.handlePhoneNo2.bind(this);
-        this.handleAddress = this.handleAddress.bind(this);
-        this.handleResidence = this.handleResidence.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             first_name: '',
             middle_name: '',
@@ -55,55 +42,52 @@ class RegisterUser extends Component {
             address: '',
             residence: '',
             business: '',
-            join_date: ''
+            relation: '',
+            member_id: this.props.match.params.id
         };
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleFirstName(e) {
+    handleFirstName = (e) => {
         this.setState({ first_name: e.target.value });
     }
-    handleMiddleName(e) {
+    handleMiddleName = (e) => {
         this.setState({ middle_name: e.target.value });
     }
-    handleLastName(e) {
+    handleLastName = (e) => {
         this.setState({ last_name: e.target.value });
     }
-    handleSex(e) {
+    handleSex = (e) => {
         this.setState({ gender: e.target.value });
     }
-    handleBirthday(e) {
+    handleBirthday = (e) => {
         this.setState({ birthday: e.target.value });
     }
-    handlePhoneNo(e) {
+    handlePhoneNo = (e) => {
         this.setState({ phone_no: e.target.value });
     }
-    handlePhoneNo2(e) {
+    handlePhoneNo2 = (e) => {
         this.setState({ phone_no_2: e.target.value });
     }
-    handleEmail(e) {
+    handleEmail = (e) => {
         this.setState({ email: e.target.value });
     }
-    handleAddress(e) {
+    handleAddress = (e) => {
         this.setState({ address: e.target.value });
     }
-    handleResidence(e) {
+    handleResidence = (e) => {
         this.setState({ residence: e.target.value });
-    }
-    handleJoinDate = (e) => {
-        this.setState({ join_date: e.target.value });
     }
     handleBusiness = (e) => {
         this.setState({ business: e.target.value });
     }
+    handleRelation = (e) => {
+        this.setState({ relation: e.target.value });
+    }
 
     handleSubmit(e) {
         e.preventDefault();
-        let group_id = this.props.match.params.id;
-        if (group_id === "group") {
-            group_id = localStorage.getItem('group_id')
-        } else {
-            group_id = this.props.match.params.id
-        }
+        //console.log('ee',this.state.first_name);
         const data = {
             first_name: this.state.first_name,
             middle_name: this.state.middle_name,
@@ -114,10 +98,10 @@ class RegisterUser extends Component {
             phone_no_2: this.state.phone_no_2,
             email: this.state.email,
             address: this.state.address,
-            group_id: group_id,
             residence: this.state.residence,
             business: this.state.business,
-            join_date: this.state.join_date
+            relation: this.state.relation,
+            member_id: this.state.member_id
         };
         let token = localStorage.getItem('token');
         const headers = {
@@ -125,7 +109,7 @@ class RegisterUser extends Component {
             'Authorization': 'Bearer ' + token
         }
 
-        let url = apiBaseUrl + '/add_user';
+        let url = apiBaseUrl + '/add_heir';
         axios.post(url, data, { headers: headers }).then((response) => {
             console.log(response.data);
             this.setState({
@@ -140,11 +124,10 @@ class RegisterUser extends Component {
                 address: '',
                 residence: '',
                 business: '',
-                join_date: ''
+                relation:''
             });
-            this.props.history.push('/heir/' + response.data.member_id);
         }).catch((error) => {
-            console.log(error);
+            console.log(error.request);
         });
 
         //this.setState({email: e.target.value });
@@ -160,7 +143,7 @@ class RegisterUser extends Component {
                             <Form onSubmit={this.handleSubmit} action="" method="post" encType="multipart/form-data"
                                 className="form-horizontal">
                                 <CardHeader>
-                                    <strong>Member</strong> Registration
+                                    <strong>Heir</strong> Registration
                                 </CardHeader>
                                 <CardBody>
                                     <FormGroup row>
@@ -200,7 +183,8 @@ class RegisterUser extends Component {
                                                 name="text-input" placeholder="Last Name"
                                                 required />
                                             {/*<FormText color="muted">This is a help text</FormText>*/}
-                                        </Col>  <Col md="2">
+                                        </Col> 
+                                         <Col md="2">
                                             <Label htmlFor="text-input">Sex</Label>
                                         </Col>
                                         <Col xs="12" md="4">
@@ -303,23 +287,30 @@ class RegisterUser extends Component {
                                                 required />
                                             {/*<FormText color="muted">This is a help text</FormText>*/}
                                         </Col>
-                                        <Col md="">
-                                            <Label htmlFor="text-input">Join Date</Label>
+                                        <Col md="2">
+                                            <Label htmlFor="text-input">Relation</Label>
                                         </Col>
                                         <Col xs="12" md="4">
-                                            <Input
-                                                onChange={this.handleJoinDate}
-                                                value={this.state.join_date}
-                                                type="date"
-                                                name="text-input" placeholder="Join Date"
-                                                required />
+                                            <Input type="select"
+                                                onChange={this.handleRelation}
+                                                value={this.state.relation}
+                                                name="select" id="select" required>
+                                                <option value="">Select Relation</option>
+                                                <option value="son">Son</option>
+                                                <option value="daughter">Daughter</option>
+                                                <option value="wife">Wife</option>
+                                                <option value="husband">Husband</option>
+                                                <option value="father">Father</option>
+                                                <option value="mother">Mother</option>
+                                                <option value="other">Other</option>
+                                            </Input>
                                             {/*<FormText color="muted">This is a help text</FormText>*/}
                                         </Col>
                                     </FormGroup>
                                 </CardBody>
                                 <CardFooter>
                                     <Button type="submit" size="sm" color="primary">
-                                        <i className="fa fa-dot-circle-o"></i> Next</Button>
+                                        <i className="fa fa-dot-circle-o"></i> Finish</Button>
                                     <Button type="reset" size="sm" color="danger">
                                         <i className="fa fa-ban"></i> Reset</Button>
                                 </CardFooter>
@@ -332,4 +323,4 @@ class RegisterUser extends Component {
     }
 }
 
-export default RegisterUser;
+export default Heir;

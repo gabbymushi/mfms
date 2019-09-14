@@ -10,6 +10,7 @@ const UserShare = React.lazy(() => import('./views/Shares/Shares'));
 const ProcessLoan = React.lazy(() => import('./views/Loan/ProcessLoan'));
 const LoanTransactions = React.lazy(() => import('./views/Loan/LoanTransactions'));
 const LoanInstallments = React.lazy(() => import('./views/Loan/LoanInstallments'));
+const Heir = React.lazy(() => import('./views/Users/Heir'));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -23,6 +24,7 @@ const routes = [
     { path: '/processLoan/:id', exact: true, name: 'User Shares', component: ProcessLoan },
     { path: '/transactions/:id/:loan_id', exact: true, name: 'Loan Transaction', component: LoanTransactions },
     { path: '/installments/:id/:loan_id', exact: true, name: 'Loan Installments', component: LoanInstallments },
+    { path: '/heir/:id/', exact: true, name: 'Heir', component: Heir },
 ];
 
 export default routes;
