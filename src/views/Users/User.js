@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Badge, Card, CardBody, CardHeader, Col, Row, Table, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import _ from 'lodash';
 
 import axios from "axios";
 import SystemParameters from '../../SystemParameters';
@@ -83,7 +84,7 @@ class User extends Component {
                         <Col lg={8}>
                             <Card>
                                 <CardHeader>
-                                    <strong><i className="icon-info pr-1"></i>User id: {this.props.match.params.id}</strong>
+                                    <strong><i className="icon-info pr-1"></i>Member's Information</strong>
                                 </CardHeader>
                                 <CardBody>
                                     <Table responsive striped hover>
@@ -94,7 +95,7 @@ class User extends Component {
                                             </tr>
                                             <tr>
                                                 <td>Gender</td>
-                                                <td><strong>{member.gender}</strong></td>
+                                                <td><strong>{_.startCase(member.gender)}</strong></td>
                                             </tr>
                                             <tr>
                                                 <td>Birthday</td>
@@ -115,7 +116,7 @@ class User extends Component {
                                             <tr>
                                                 <td>Address</td>
                                                 <td><strong>{member.address}</strong></td>
-                                            </tr> 
+                                            </tr>
                                             <tr>
                                                 <td>Business</td>
                                                 <td><strong>{member.business}</strong></td>
@@ -128,7 +129,7 @@ class User extends Component {
                                                 <td>Join Date</td>
                                                 <td><strong>{member.join_date}</strong></td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </Table>
                                 </CardBody>
@@ -157,52 +158,56 @@ class User extends Component {
                                     <strong><i className="icon-info pr-1"></i>Heir' deteils</strong>
                                 </CardHeader>
                                 <CardBody>
-                                    <Table responsive striped hover>
-                                        <tbody>
-                                            <tr>
-                                                <td>Full Name</td>
-                                                <td><strong>{member.heir.first_name} {member.heir.middle_name} {member.heir.last_name}</strong></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Gender</td>
-                                                <td><strong>{member.heir.gender}</strong></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Birthday</td>
-                                                <td><strong>{member.heir.birthday}</strong></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Phone No</td>
-                                                <td><strong>{member.heir.phone_no}</strong></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Altenative phone no</td>
-                                                <td><strong>{member.heir.phone_no_2}</strong></td>
-                                            </tr>
-                                            <tr>
-                                                <td>E-mail</td>
-                                                <td><strong>{member.heir.email}</strong></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Address</td>
-                                                <td><strong>{member.heir.address}</strong></td>
-                                            </tr> 
-                                            <tr>
-                                                <td>Business</td>
-                                                <td><strong>{member.heir.business}</strong></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Relation</td>
-                                                <td><strong>{member.heir.relation}</strong></td>
-                                            </tr>
-                                           
-                                        </tbody>
-                                    </Table>
+                                    {member.heir!==null ?
+                                        (<Table responsive striped hover>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Full Name</td>
+                                                    <td><strong>{member.heir.first_name}  {member.heir.middle_name} {member.heir.last_name}</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Gender</td>
+                                                    <td><strong>{_.startCase(member.heir.gender)}</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Birthday</td>
+                                                    <td><strong>{member.heir.birthday}</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Phone No</td>
+                                                    <td><strong>{member.heir.phone_no}</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Altenative phone no</td>
+                                                    <td><strong>{member.heir.phone_no_2}</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>E-mail</td>
+                                                    <td><strong>{member.heir.email}</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Address</td>
+                                                    <td><strong>{member.heir.address}</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Business</td>
+                                                    <td><strong>{member.heir.business}</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Relation</td>
+                                                    <td><strong>{_.startCase(member.heir.relation)}</strong></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </Table>
+                                        ):<p>No Heir Registered</p>
+                                    }
+
                                 </CardBody>
                             </Card>
                         </Col>
                         <Col sm="12" xl="4">
-                  {/*           <Card>
+                            {/*           <Card>
                                 <CardHeader>
                                     <i className="fa fa-align-justify"></i><strong>Accounts Summary</strong>
                                     <small> </small>
